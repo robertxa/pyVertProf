@@ -1,0 +1,9 @@
+History changes of the python module pyswath
+
+0.1.1: 2018/01/10
+	- initial release
+	
+0.0.1: 2016-03-02
+	- change to Kapteyn method
+	- remove Statsmodels module (http://statsmodels.sourceforge.net/devel/index.html)
+	- New Plot
