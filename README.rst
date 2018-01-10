@@ -1,4 +1,4 @@
-pyswath
+pyVertProf
 ========
 
 This code is to compute regressions for points with their error using different regression methods
@@ -52,7 +52,7 @@ To plot a swath profile [A,B] through the raster 'DEM/dem.tif':
 
 .. code-block:: python
 
-    >>> vertprof.vertprofile(datafnme = u'test', work_dir = u'test',  header = 1, struct = [1,2,3,4], labelx = 'Ages (Ka)', labely = 'Depth (m)', rangex = [0,8], rangey = [10,4],	statstypes = [0,1,2,3], confprob = 95.0)
+    >>> vertprof.vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4], labelx = 'to be completed', labely = 'to be completed', rangex = None, rangey = None, statstypes = [0,1,2,3], confprob = 95.0, fontsz = 10, fontleg = 9, output = 'graph')
 
 Options/inputs
 --------------
@@ -100,7 +100,7 @@ Options/inputs are (option_names):
 						``rangey = [10,4]`` (in that case, the axis is inverted)
 	
 	8. statstypes: Type(s) of the stats to plot
-					0 = kmpfit effective variance : `kapteyn method, <https://www.astro.rug.nl/software/kapteyn/kmpfittutorial.html>'_ with error on X and Y or Y only or none
+					0 = kmpfit effective variance : `kapteyn method <https://www.astro.rug.nl/software/kapteyn/kmpfittutorial.html>'_ with error on X and Y or Y only or none
 					1 = kmpfit unweighted : Orthogonal Distance Regression
 					2 = Williamson : least square fitting with errors in X and Y according to Williamson (Canadian Journal of Physics, 46, 1845-1847, 1968)
 					3 = Cl relative weighting in X &/or Y
