@@ -52,7 +52,7 @@ To plot a swath profile [A,B] through the raster 'DEM/dem.tif':
 
 .. code-block:: python
 
-    >>> vertprof.vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4], labelx = 'to be completed', labely = 'to be completed', rangex = None, rangey = None, statstypes = [0,1,2,3], confprob = 95.0, fontsz = 10, fontleg = 9, output = 'graph')
+    >>> vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4], labelx = 'to be completed', labely = 'to be completed', rangex = None, rangey = None, statstypes = [0,1,2,3], confprob = 95.0, fontsz = 10, fontleg = 9, output = 'graph')
 
 Options/inputs
 --------------

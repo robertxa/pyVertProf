@@ -87,11 +87,11 @@ def vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4],
 	
 	USAGE
 		>>>from vertprof import vertprofile
-		>>>vertprof.vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4],
-								labelx = 'to be completed', labely = 'to be completed', rangex = None, rangey = None,
-								statstypes = [0,1,2,3], confprob = 95.0,
-								fontsz = 10, fontleg = 9,
-								output = 'graph')
+		>>>vertprofile(datafnme = u'', work_dir = u'',  header = 1, struct = [1,2,3,4],
+						labelx = 'to be completed', labely = 'to be completed', rangex = None, rangey = None,
+						statstypes = [0,1,2,3], confprob = 95.0,
+						fontsz = 10, fontleg = 9,
+						output = 'graph')
 		
 	INPUTS
 		To use options or inputs, you need to set them as

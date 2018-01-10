@@ -12,7 +12,7 @@ def readme():
 
 setup(name='pyVertProf',
 	#version='0.1.1',
-	version=pyswath.__version__,
+	version=pyVertProf.__version__,
 	description='package that provide tools to perform stats on vertical profils',
 	long_descritpion=open('README.rst').read(),
 	url='https://github.com/robertxa/pyVertProf',
