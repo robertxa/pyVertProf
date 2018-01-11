@@ -140,7 +140,7 @@ Examples
 
 .. code-block:: python
 
-    >>> vertprofile(datafnme = u'test', work_dir = u'test',  header = 1, struct = [1,2,3,4], labelx = 'Ages (Ka)', labely = 'Depth (m)', rangex = [0,8], rangey = [10,4], statstypes = [0,1,2,3], confprob = 95.0)
+    >>> vertprofile(datafnme = u'test.txt', work_dir = u'test',  header = 1, struct = [1,2,3,4], labelx = u'Ages (Ka)', labely = u'Depth (m)', rangex = [0,8], rangey = [10,4], statstypes = [0,1,2,3], confprob = 95.0)
 
 The previous line permits to build the graph :
 
