@@ -164,4 +164,4 @@ Please, use `https://isterre.fr/spip.php?page=contact&id_auteur=303 <https://ist
 Licence
 -------
 
-This package is licenced with `CCby-nc <https://creativecommons.org/licenses/by-nc/2.0/>`_
+This package is licenced with `CCby-nc <https://creativecommons.org/licenses/by-nc-sa/3.0/>`_

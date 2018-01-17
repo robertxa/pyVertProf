@@ -31,42 +31,42 @@ for module in modulesNames:
 		globals()[module] = module_obj
 	except ImportError:
 		#sys.exit(u"ERROR : Module " + module + " not present. \n\n Please, install it \
-		raise ModuleError(u"ERROR : Module " + module + " not present. \n\n Please, install it \
+		raise ImportError(u"ERROR : Module " + module + " not present. \n\n Please, install it \
 			      \n\n Edit the source code for more information")
 from shutil import copyfile
 try:
 	import numpy as np                               # need version 1.7 or higher
 	from numpy.random import normal,randint
 except ImportError:
-	raise ModuleError(u"ERROR : Module Numpy not present. \n\n Please, install it \
+	raise ImportError(u"ERROR : Module Numpy not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 try:
 	import os
 	from os import path, access, R_OK, mkdir         # W_OK for write permission.
 except ImportError:
-	raise ModuleError("ERROR : Module os not present. \n\n Please, install it \
+	raise ImportError("ERROR : Module os not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 try:
 	import scipy as sp                               # need version 0.12 or higher
 except ImportError:
-	raise ModuleError(u"ERROR : Module scipy not present. \n\n Please, install it \
+	raise ImportError(u"ERROR : Module scipy not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 try:
 	import matplotlib.pyplot as plt                  # module to plot figures
 	from matplotlib import cm
 	from matplotlib.patches import Polygon
 except ImportError:
-	raise ModuleError(u"ERROR : Module matplotlib not present. \n\n Please, install it \
+	raise ImportError(u"ERROR : Module matplotlib not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 try:
 	from pylab import savefig                        # Module to manage figures
 except ImportError:
-	raise ModuleError(u"ERROR : Module pylab not present. \n\n Please, install it \
+	raise ImportError(u"ERROR : Module pylab not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 try:
 	from kapteyn import kmpfit
 except ImportError:
-	raise ModuleError(u"ERROR : Module kapteyn not present. \n\n Please, install it \
+	raise ImportError(u"ERROR : Module kapteyn not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
 
 from statsfuncs import *
