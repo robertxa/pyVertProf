@@ -1,0 +1,63 @@
+Dataset test
+Results of weigthed least square from file test.txt
+
+xmax/min = 8.3, 5.2
+ymax/min = 3.01, 1.78
+x/y mean = 6.74, 2.602
+
+Methods used are: 
+   - kmpfit:  kapteyn method, from https://www.astro.rug.nl/software/kapteyn/kmpfittutorial.html 
+              with error on X and Y or Y only or none 
+   - ODR: Orthogonal Distance Regression 
+   - Williamson: least square fitting with errors in X and Y according to 
+                 Williamson (Canadian Journal of Physics, 46, 1845-1847, 1968) 
+
+
+======== Results kmpfit: weights for both coordinates =========
+Fitted parameters:      [5.292515000443791, -0.40633122003356625]
+Covariance errors:      [0.79861526 0.11388164]
+Standard errors         [0.61110031 0.08714222]
+Chi^2 min:              1.7565926232676299
+Reduced Chi^2:          0.5855308744225433
+Iterations:             6
+
+
+======== Results kmpfit unit weighting =========
+Fitted parameters:      [4.954787057634281, -0.34907819846205945]
+Covariance errors:      [2.72394903 0.39866274]
+Standard errors         [0.68037801 0.09957652]
+Chi^2 min:              0.18716465352828984
+Reduced Chi^2:          0.06238821784276328
+
+======== Results ODR =========
+Fitted parameters:      [ 5.2925149  -0.40633121]
+Covariance errors:      [0.79861519 0.11388163]
+Standard errors:        [0.61110026 0.08714221]
+Minimum chi^2:          1.756592623267645
+Minimum (reduced)chi^2: 0.5855308744225484
+
+======== Results Williamson =========
+Average x weighted:     6.910615017302339
+Average x unweighted:   6.74
+Fitted parameters:      [5.292514997635747,-0.40633121958741564]
+Covariance errors:      [0.7984683596480283,0.1137856203339584]
+Minimum chi^2:          1.7565926232676299
+
+=====================================
+Practical results:                     a       +       b     *   x
+kmpfit unweighted:                  4.9548          -0.3491
+   Exhumation Rate:       -2.8647
+   Min. Exh. Rate:       -1.5046
+   Max. Exh. Rate:      -29.8323
+kmpfit effective variance:           5.2925          -0.4063
+   Exhumation Rate:       -2.4610
+   Min. Exh. Rate:       -1.4255
+   Max. Exh. Rate:       -8.9983
+ODR:                                 5.2925          -0.4063
+   Exhumation Rate:       -2.4610
+   Min. Exh. Rate:       -1.4255
+   Max. Exh. Rate:       -8.9983
+Williamson:                          5.2925          -0.4063
+   Exhumation Rate:       -2.4610
+   Min. Exh. Rate:       -0.4623
+   Max. Exh. Rate:        0.7406

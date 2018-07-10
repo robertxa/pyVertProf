@@ -3,7 +3,7 @@
 
 from setuptools import setup, find_packages
 
-# Import of the lib pyswath
+# Import of the lib pyVertProf
 import pyVertProf
 
 def readme():
@@ -19,16 +19,18 @@ setup(name='pyVertProf',
 	download_url='https://github.com/robertxa/pyVertProf/archive/master.zip',
 	author='Xavier Robert',
 	author_email='xavier.robert@univ-grenoble-alpes.fr',
-	license='CCby-nc',
+	license='CCby-nc-sa',
 	packages=find_packages(),
 	install_requires=[
 	      'kapteyn'
 	],
-	#classifiers=[
-	#	"Programming language :: Python",
-	#	"Operating System :: OS Independent",
-	#	"Topic :: GIS",
-	#],
+	classifiers=[
+		"Programming language :: Python",
+		"Operating System :: OS Independent",
+		"Programming Language :: Python :: 3",
+		"Topic :: Scientific/Engineering :: Visualization"
+	#	"Topic :: Scientific/Engineering :: GIS"
+	],
 	include_package_data=True,
 	zip_safe=False)
       
