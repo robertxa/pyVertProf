@@ -22,3 +22,10 @@ In [33]: vertprofile(datafnme = u'test.txt', work_dir = u'/Users/benjamingerard/
     
     
 vertprofile(datafnme = (u'testAFT.txt', u'testAHe.txt') , work_dir = (u'test',u'test'), header = (1,1), struct  = ([1,2,3,4],[1,2,3,4]), labelx = 'Ages (My)', labely = 'Elevation (km)', labeldata = (u'AFT', u'AHe'), rangex = [0,26], rangey = [1.5,3.7], statstypes = [0,1,2,3], confprob  = 95.0, fontsz = 10, fontleg = 9, output = 'graph1')
+
+
+ 
+ 
+ 
+
+

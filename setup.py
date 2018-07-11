@@ -25,9 +25,9 @@ setup(name='pyVertProf',
 	      'kapteyn'
 	],
 	classifiers=[
-		"Programming language :: Python",
+		#"Programming language :: Python",
 		"Operating System :: OS Independent",
-		"Programming Language :: Python :: 3",
+		#"Programming Language :: Python :: 3",
 		"Topic :: Scientific/Engineering :: Visualization"
 	#	"Topic :: Scientific/Engineering :: GIS"
 	],

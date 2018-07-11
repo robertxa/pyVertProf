@@ -90,25 +90,47 @@ from .statsfuncs import *
 def plotgraphreg(struct, x, y, errx, erry, cpt,
                  labeldata, statstypes, a_will, b_will, 
                  verts, confprob, 
-                 fitobj, fitobj2, fitobj3, model):
+                 fitobj, fitobj2, fitobj3):
 	
 	"""
-	Function to...
+	Function to plot data and regression stats
 	
+	USAGE
+		axes = plotgraphreg(struct, x, y, errx, erry, colors,
+		                    labeldata, statstypes, a_will, b_will, 
+		                    verts, confprob, fitobj, fitobj2, fitobj3)
+		                    
 	INPUT
-		frame: 
-		struct: 
-		x, y: 
-		errx, erry: 
-		X, Y: 
-		statstypes: 
-		a_will, b_will: 
-		verts: 
-		confprob:
-		fitobj:
+		1. struct: structure of the data we want to plot
+		
+		2. x, y: x and y data to plot
+		         x and y should be vectors with the same length
+		      
+		3. errx, erry: errors in x and y respectively.
+				       errx and erry should be vectors with the same lenght than x and y
+		
+		4. cpt: color to plot
+		
+		5. labeldata: string to be used in the legend of the data
+
+		6. statstypes: Type(s) of the stats to plot
+			  		   0 = kmpfit effective variance
+					   1 = kmpfit unweighted
+					   2 = Williamson
+					   3 = Cl relative weighting in X &/or Y
+					   ex: statstype = [0,1,2,3] (Default)
+						   statstype = [1,3]
+						
+		7. a_will, b_will: output from the stats models
+		
+		8. verts: confidence enveloppe
+		
+		9. confprob: the confidence interval probabilty (in %)
+
+		10. fitobj, fitobj2, fitobj3: Results of the data fitting for each method used
 		
 	OUTPUT
-		frame
+		axes: axes of the graph
 	
 	"""
 	colorsdict = {'b'          : 'c',
@@ -389,6 +411,7 @@ def vertprofile(datafnme = (u'',), work_dir = (u'',),  header = (1,), struct = (
 		print(string); f1w.write(string)
 
 		# Compare result with ODR
+		# Create the linear model from statsfuncs
 		linear = Model(model)
 		if struct[i_data][3] != 0 and struct[i_data][3] != None:
 			if struct[i_data][1] != 0 and struct[i_data][1] != None:
@@ -504,7 +527,6 @@ def vertprofile(datafnme = (u'',), work_dir = (u'',),  header = (1,), struct = (
 	
 		# calcul of confidence intervals
 		dfdp = [1, x, x**2]
-		#confprob = 95.0
 		if struct[i_data][3] != 0 and struct[i_data][3] != None:
 			if struct[i_data][1] != 0 and struct[i_data][1] != None:
 				ydummy, upperband, lowerband = confidence_band(x, dfdp, confprob, fitobj, model)
@@ -572,9 +594,7 @@ def vertprofile(datafnme = (u'',), work_dir = (u'',),  header = (1,), struct = (
 		#axes = plotgraphreg(struct[i_data], x, y, errx, erry, X, Y, 
 		axes = plotgraphreg(struct[i_data], x, y, errx, erry, colors[i_data],
 		                    labeldata[i_data], statstypes, a_will, b_will, 
-		                    verts, confprob,
-		                    fitobj, fitobj2, fitobj3, model)
-	
+		                    verts, confprob, fitobj, fitobj2, fitobj3)
 	
 	# Set graph characteristics/attributes
 	plt.xlabel(labelx)
