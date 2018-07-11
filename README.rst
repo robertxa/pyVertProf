@@ -31,7 +31,7 @@ If during the update you get a problem with the update of a dependency, you may 
 
 
 The first commit (v 1.0.0) of this module has been written and tested with Python 2.7, but not with Python 3.6.
-The second comit (v 2.0.0) has been ported to Python 3.6, but not tested with Python 2.7.
+The second comit (v 2.0.0) has been ported to Python 3.6 and successfully tested with Python 2.7.
 
 Dependencies
 ------------
