@@ -2,14 +2,18 @@
 *.pyc
 
 # Setuptools distribution folder.
-/dist/
+dist/
+develop-eggs/
 build/
 
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
 /*.egg
 
+pyVertProf/*.egg-info/
+pyVertProf/__pycache__/
+
 # Test files
-/pyVertProf/test/*.pdf
-/pyVertProf/test/results*
-/pyVertProf/test/testBenj.txt
+pyVertProf/test/*.pdf
+pyVertProf/test/results*
+pyVertProf/test/testBenj.txt
