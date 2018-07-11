@@ -15,5 +15,5 @@ pyVertProf/__pycache__/
 
 # Test files
 pyVertProf/test/*.pdf
-pyVertProf/test/results*
+pyVertProf/test/results_*
 pyVertProf/test/testBenj.txt
