@@ -3,8 +3,6 @@ pyVertProf
 
 This code is to compute regressions for points with their error using different regression methods
 
-It uses a DEM that is projected in UTM (best input), but will also work with geographic coordinates (lat-long).
-
 This module may contain numerous bugs, and could probably be ameliorate and/or optimized. If you have any comments, do not hesitate to add a new branch or to contact the author.
 To know the history, please check the file History.txt
 
