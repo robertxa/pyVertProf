@@ -33,8 +33,8 @@ for module in modulesNames:
 		globals()[module] = module_obj
 	except ImportError:
 		#sys.exit(u"ERROR : Module " + module + " not present. \n\n Please, install it \
-		raise ImportError(u"ERROR : Module " + module + " not present. \n\n Please, install it \
-			      \n\n Edit the source code for more information")
+		raise ImportError(u"ERROR : Module %s not present. \n\n Please, install it \
+			      \n\n Edit the source code for more information" %(module))
 from shutil import copyfile
 try:
 	import numpy as np                               # need version 1.7 or higher
@@ -56,9 +56,8 @@ except ImportError:
 		      \n\n Edit the source code for more information")
 try:
 	import matplotlib.pyplot as plt                  # module to plot figures
-	from matplotlib import cm
+	from matplotlib import cm, rc
 	from matplotlib.patches import Polygon
-	from matplotlib import rc
 except ImportError:
 	raise ImportError(u"ERROR : Module matplotlib not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
@@ -173,7 +172,7 @@ def plotgraphreg(struct, x, y, errx, erry, cpt,
 		# plot the confidence intervals
 		#poly = Polygon(verts, closed=True, fc='c', ec='c', alpha=0.15, #ls = 'dashed',
 		poly = Polygon(verts, closed=True, fc=colorsdict[cpt], ec=colorsdict[cpt], alpha=0.2, #ls = 'dashed',
-		           label="CI (" + str(confprob) + u"%) relative weighting in X & Y")
+		           label="CI (%s\%) relative weighting in X & Y" %(str(confprob)))
 		axes = plt.gca()
 		axes.add_patch(poly)
 	
