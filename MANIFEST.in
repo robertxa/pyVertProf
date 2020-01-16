@@ -1,5 +1,6 @@
 include README.rst
 include To_Do.txt
 include History.txt
+include LICENCE.txt
 recursive-include pyVertProf *.png
 recursive-include pyVertProf test/*.txt

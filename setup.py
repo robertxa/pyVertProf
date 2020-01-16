@@ -1,6 +1,10 @@
 ######!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Copyright (c) 2020 Xavier Robert <xavier.robert@ird.fr>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+
 from setuptools import setup, find_packages
 
 # Import of the lib pyVertProf
@@ -19,7 +23,7 @@ setup(name='pyVertProf',
 	download_url='https://github.com/robertxa/pyVertProf/archive/master.zip',
 	author='Xavier Robert',
 	author_email='xavier.robert@univ-grenoble-alpes.fr',
-	license='CCby-nc-sa',
+	license='GPL-V3.0',
 	packages=find_packages(),
 	install_requires=[
 	      'kapteyn'

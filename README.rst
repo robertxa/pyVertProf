@@ -190,4 +190,5 @@ Please, use `https://isterre.fr/spip.php?page=contact&id_auteur=303 <https://ist
 Licence
 -------
 
-This package is licenced with `CCby-nc <https://creativecommons.org/licenses/by-nc-sa/3.0/>`_
+Copyright (c) 2020 Xavier Robert <xavier.robert@ird.fr>
+SPDX-License-Identifier: GPL-3.0-or-later
