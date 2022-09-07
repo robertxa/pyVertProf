@@ -30,11 +30,14 @@ If during the update you get a problem with the update of a dependency, you may 
 
 The first commit (v 1.0.0) of this module has been written and tested with Python 2.7, but not with Python 3.6.
 The second comit (v 2.0.0) has been ported to Python 3.6 and successfully tested with Python 2.7.
+The third comit (v 3.0.0) has been tested with Python 3.9.
 
 Dependencies
 ------------
 This code needs the following python modules and their dependencies, you may install them before the installation of the **pyswath** module:
 	- kapteyn
+	- alive_progress
+	- seaborn
 
 Usage
 -----
@@ -45,7 +48,7 @@ To import the module:
 
 .. code-block:: python
 
->>> from pyVertProf import vertprofile
+>>> from pyVertProf import vertprofile, BIC
 	
 To plot a single age-elevation profile from a file 'test/test.txt':
 
@@ -59,10 +62,16 @@ To plot an age-elevation profile from two files 'test/test1.txt' and 'test/test2
 
     >>> vertprofile(datafnme = (u'text1.txt',u'text2.txt'), work_dir = (u'test/',),  header = (1,), struct = ([1,2,3,4],), labelx = 'to be completed', labely = 'to be completed', labeldata = (u'to be completed', u'to be completed'), rangex = None, rangey = None, statstypes = [0,1,2,3], confprob = 95.0, fontsz = 10, fontleg = 9, output = 'graph')
 
+To compute a BIC analysis as in Glotzbach et al., 2011:
+
+.. code-block:: python
+
+    >>> BIC(filename_data = 'test.txt', systems = ['AHE', 'AFT', 'ZHE', 'ZFT'], nslopes = 3)
+
 Options/inputs
 --------------
 
-To use options or inputs, you need to set them as:
+To use options or inputs with vertprof, you need to set them as:
 
 .. code-block:: python
 
@@ -143,6 +152,34 @@ Options/inputs are (option_names):
 				
 				ex: ``confprob = 95.0 (Default)``
 
+
+To use options or inputs with BIC, you need to set them as:
+
+.. code-block:: python
+
+    >>> BIC(option_name = option_value, [...])
+	
+filename_data = 'test.txt', systems = , nslopes = 3
+
+Options/inputs are (option_names):
+	1. filename_data: File name where are stored the data to analyze (local path)
+	
+				ex: ``filename_data = "test_file.txt"``
+	
+				Default ``None``
+
+	2. systems: systems to analyze with the BIC method
+
+				ex: ``systems = ['AHE', 'AFT', 'ZHE', 'ZFT']``
+
+				Default ``None``
+
+	3. nslopes: maximum number of slopes to compute for the BIC computation
+
+				ex: ``nslopes = 3``
+
+				Default ``None``
+
 Help files
 ----------
 
@@ -177,9 +214,13 @@ The previous line permits to build the graph:
 Outputs
 -------
 
-The code build two files, stored in the first working directory given in the ''work_dir'' variable:
+The vertprofile code build two files, stored in the first working directory given in the ''work_dir'' variable:
 	- Graph.pdf: Graphical results of the computation
 	- results_datafnme.txt: Output of the fitting methods
+
+The BIC build two files, stored in the Graphs directory
+	- BIC.pdf: Graphical results of the computation
+	- resultsBIC.txt: Output of the BIC methods
 
 Contact
 -------
@@ -190,5 +231,5 @@ Please, use `https://isterre.fr/spip.php?page=contact&id_auteur=303 <https://ist
 Licence
 -------
 
-Copyright (c) 2020 Xavier Robert <xavier.robert@ird.fr>
+Copyright (c) 2020-2022 Xavier Robert <xavier.robert@ird.fr>
 SPDX-License-Identifier: GPL-3.0-or-later

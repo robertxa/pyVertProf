@@ -85,6 +85,7 @@ except ImportError:
 
 # Import specific modules
 from .statsfuncs import *
+from pyBIC import *
 
 
 ############################################################################
@@ -258,7 +259,7 @@ def vertprofile(datafnme = (u'',), work_dir = (u'',),  header = (1,), struct = (
 		Please, use https://isterre.fr/spip.php?page=contact&id_auteur=303
 
 	LICENCE
-		This package is licenced with `CCby-nc-sa` (https://creativecommons.org/licenses/by-nc-sa/2.0/)
+		This package is licenced with `CCby-nc-sa` (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 	"""
 	
 	# set colors
@@ -627,5 +628,23 @@ if __name__ == u'__main__':
 	
 	# Run the code
 	vertprofile()
-	
+
+	# Plot the BIC
+	# Define parameters
+	# Do it as txt file, csvfile or xlsx/xls files?
+	filename_data = 'test_data.txt'
+
+	# Systems to analyse
+	# systems = ['AHE', 'AFT', 'ZHE', 'ZFT']
+	systems = ['AHE', 'AFT', 'ZHE']
+	#systems = ['AHE', 'AFT']
+    
+	nslopes = None
+	#nslopes = 2
+	#nslopes = 3
+	#nslopes = 5
+
+	# Call the function
+	BIC(filename_data, systems, nslopes)
+		
 # END of code

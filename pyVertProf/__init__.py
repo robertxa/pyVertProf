@@ -11,12 +11,14 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 
-__version__ = "2.0.0"
+__version__ = "3.0.0"
 
 # Import modules
 import sys
 import os
 import copy
+from copy import copy
+from itertools import combinations
 import numpy as np
 
 # Import all the functions
@@ -24,3 +26,4 @@ __all__ = ['kapteyn']
 
 from .vertprof import *
 from .statsfuncs import *
+from .pyBIC import *

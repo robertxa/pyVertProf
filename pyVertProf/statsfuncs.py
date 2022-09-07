@@ -57,6 +57,11 @@ try:
 except ImportError:
 	raise ImportError(u"ERROR : Module kapteyn not present. \n\n Please, install it \
 		      \n\n Edit the source code for more information")
+try:
+	from itertools import combinations
+except ImportError:
+	raise ImportError(u"ERROR : Module itertools not present. \n\n Please, install it \
+		      \n\n Edit the source code for more information")
 
 # Definition of functions
 
@@ -68,6 +73,8 @@ def model(p, x):
 	a, b = p
 	return a + b*x
 
+
+#############################################################################
 def residuals(p, data):
 	"""
 	Residuals function for data with errors in both coordinates
@@ -79,6 +86,8 @@ def residuals(p, data):
 	d = wi*(y-model(p,x))
 	return d
 
+
+#############################################################################
 def residuals2(p, data):
 	"""
 	Residuals function for data with errors in y only
@@ -88,7 +97,9 @@ def residuals2(p, data):
 	wi = np.where(ey==0.0, 0.0, 1.0/ey)
 	d = wi*(y-model(p,x))
 	return d
-  
+
+
+#############################################################################  
 def williamson(x, y, errx, erry, struct, myoutput):
 	"""
 	Compute Williamson
@@ -146,6 +157,7 @@ def williamson(x, y, errx, erry, struct, myoutput):
 	return a_will, b_will, siga, sigb, beta, x_av, x.mean()
 
 
+#############################################################################
 def confidence_band(x, dfdp, confprob, fitobj, f, abswei=False):
 	"""
 	 Given a value for x, calculate the error df in y = model(p,x)
@@ -216,6 +228,7 @@ def confidence_band(x, dfdp, confprob, fitobj, f, abswei=False):
 	return y, upperband, lowerband
 	  
 
+#############################################################################
 def lingres(xa, ya, w):
 	"""
 	Return a, b for the relation y = a + b*x
@@ -234,6 +247,143 @@ def lingres(xa, ya, w):
 	
 	return a, b
 
+
+#############################################################################
+def compute_log_L(bounds, data, system, mod, log_L):
+    
+    #for n in range (0, a1+1):
+    for n in range (bounds[0], bounds[1]):
+        log_L += -((np.log(2 * np.pi)/2) + np.log(data['D' + system][n]) + \
+                    0.5 * ((mod[n] - data[system][n]) / data['D' + system][n])**2)
+
+    return log_L
+
+
+#############################################################################
+def find_combinaisons(data, system, nslope):
+    """
+    Function to find the number of combinaisons of knickpoints, in a ndata-long vector
+    Between each knickpoint, we should have a minimum of 3 consecutive data
+
+    Args:
+        ndata (integer) : lenght of the vector
+        nslope (integer): number of knickpoints + 1
+    
+    Returns:
+        combi_tot (list of tuples): internal knickpoints combinations
+    """
+    
+    # Built the list of indexes of data
+    ndata = len(data[system])
+    junk = np.arange(ndata)
+    # Compute all the combinations
+    combi_tot = list(combinations(junk, nslope - 1))
+    # Remove the combinations where:
+    #   - combi_tot[i][1] < 3
+    #   - combi_tot[i][nslope - 1 - 1] > ndata -1 - 3 
+    #   - combi_tot[i][j] - combi_tot[i][j+1] < 3
+    indextodrop = []
+    if nslope > 2:
+        for i in range (len(combi_tot)):
+            if combi_tot[i][0] < 3:
+                # Remove index where there is less than 3 data at the beginning
+                indextodrop.append(i)
+            if combi_tot[i][nslope -2] > ndata - 4:
+                # Remove index where there is less than 3 data at the end
+                indextodrop.append(i)
+            for j in range(0, nslope -2):
+                if (combi_tot[i][j+1] - combi_tot[i][j]) < 3:
+                    # Remove index where there is less than 3 data in all other situations
+                    indextodrop.append(i)
+        # remove dupplicates
+        indextodrop = list(set(indextodrop))
+        for i in indextodrop[::-1]:
+            combi_tot.remove(combi_tot[i])
+    else:
+        for i in [ndata -1, ndata -2, ndata -3, 2, 1, 0]:
+            combi_tot.remove(combi_tot[i])
+
+    return combi_tot
+
+
+#############################################################################
+def lsqfityw(X, Y, sY):
+    """
+    From lsqfityw.m by:  Edward T Peltzer, MBARI, revised:  2007 Apr 28.
+    M-file to calculate a "MODEL-1" least squares fit to WEIGHTED x,y-data pairs:
+     The line is fit by MINIMIZING the WEIGHTED residuals in Y only.
+
+     The equation of the line is:     Y = mw * X + bw.
+
+     Equations are from Bevington & Robinson (1992)
+       Data Reduction and Error Analysis for the Physical Sciences, 2nd Ed."
+       for mw, bw, smw and sbw, see p. 98, example calculation in Table 6.2;
+       for rw, see p. 199, and modify eqn 11.17 for a weighted regression by
+           substituting Sw for n, Swx for Sx, Swy for Sy, Swxy for Sxy, etc. 
+
+     Data are input and output as follows:
+
+         [mw,bw,rw,smw,sbw,xw,yw] = lsqfityw(X,Y,sY)
+
+    Args:
+        X  (array): x data (vector)
+        Y  (array): y data (vector)
+        sY (array): estimated uncertainty in y data (vector)
+                    sY may be measured or calculated:
+                        sY = sqrt(Y), 2% of y, etc.
+                    Data points are then weighted by:
+                        w = 1 / sY-squared.
+
+    Returns:
+        mw   (Float) =    slope
+        bw   (Float) =    y-intercept
+        rw   (Float) =    weighted correlation coefficient
+        smw  (Float) =    standard deviation of the slope
+        sbw  (Float) =    standard deviation of the y-intercept
+
+     NOTE that the line passes through the weighted centroid: (xw,yw).
+
+    Raises:
+        NameError: _description_
+
+    """
+
+    # Determine the size of the vector
+    n = len(X)
+
+    # Calculate the weighting factors
+    W = 1 / (sY**2)
+
+    # Calculate the sums
+    Sw = sum(W)
+    Swx = sum(W * X)
+    Swy = sum(W * Y)
+    Swx2 = sum(W * X**2)
+    Swxy = sum(W * X * Y)
+    Swy2 = sum(W * Y**2)
+
+    # Determine the weighted centroid
+    xw = Swx / Sw
+    yw = Swy / Sw
+
+    # Calculate re-used expressions
+    num = Sw * Swxy - Swx * Swy
+    del1 = Sw * Swx2 - Swx**2
+    del2 = Sw * Swy2 - Swy**2
+
+    # Calculate mw, bw, rw, smw, and sbw
+    mw = num / del1
+    bw = (Swx2 * Swy - Swx * Swxy) / del1
+
+    rw = num / (np.sqrt(del1 * del2))
+
+    smw = np.sqrt(Sw / del1)
+    sbw = np.sqrt(Swx2 / del1)
+
+    return mw, bw, rw, smw, sbw, xw, yw
+
+
+#############################################################################
 class color:
 	"""
 	Class for bold/colors fonts in texts
