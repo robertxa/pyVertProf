@@ -1,69 +1,23 @@
 #!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
 """
-This matlab script calculates the best fitting AER using least-square fitting taking into account 
+This Python script calculates the best fitting AER using least-square fitting taking into account 
 measurement errors. The number of slopes is evaluated using the Bayesian Information Criteria (BIC). 
-Original Matlab 
-Code written by C. Glotzbach in 2010. Please cite the EPSL-Paper: Glotzbach et al. (2011).
-Please, if you use this module, cite :
-Robert X., pyAER, a python BIC Implementation for AER, 2022; Zenodo : 
+Original Matlab Code written by C. Glotzbach in 2010. Please cite the EPSL-Paper: Glotzbach et al. (2011).
+Please, if you use this module, cite also: Robert X., pyAER, a python BIC Implementation for AER, 2022; Zenodo : 
 
 # Copyright (c) 2022 Xavier Robert <xavier.robert@ird.fr>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
 INPUTS:
-    demname (string)            : Path and name of the DEM to use for RRIM process
-                                  This has been tested with tif and geotiff files with succes
-    nodatavalue (int, optional) : Value used to describe No Data
-                                  Defaults to -9999
-    demfill (bool, optional)    : True to impose the filling of the depressions
-                                  False to avoid the fill of the depressions
-                                  Defaults to False
-    svf_n_dir (int, optional)   : number of directions for openness
-                                  See the RVT_py documentation for more info
-                                  Default to 8
-    svf_r_max (int, optional)   : max search radius in pixels for openness
-                                  See the RVT_py documentation for more info
-                                  Default to 10
-    svf_noise (int, optional)   : level of noise remove for openness
-                                  0-don't remove, 1-low, 2-med, 3-high
-                                  See the RVT_py documentation for more info
-                                  Default to 0
-    saturation (int, optional)  : manages the red saturation (from slope)
-                                  Used to build the HSV color scale
-                                  Default to 90
-    brithness (int, optional)   : the brithness (from diff. openness)
-                                  Used to build the HSV color scale
-                                  Default to 150
-    isave (bool, optional)      : True to save temporary rasters (slope, openness,...)
-                                  False to avoid saving temporary rasters
-                                  Defaults to True
-    ikeep (bool, optional)      : True to use existing slope and openness rasters
-                                  False to recompute slope and openness rasters
-                                  This is usefull when we just play with colors parameters!
-                                  Defaults to False
+    
 
 OUTPUT:
-    RRIM raster as a geotiff file. 
-    If the original image is georeferenced, the RRIM will also be georeferenced 
-    in the same projection system ad geographical reference
+    
 
 USAGE:
-    To generate a RRIM geotiff from the DEM ./Test/test.tif, 
-    that contains no data values as -9999 and with a depression filling,
-    after installation of the module, run in a python interpreter:
-        >>> from pyRRIM import rrim
-        >>> rrim(demname = '../Test/test.tif', nodatavalue = -9999, demfill = True,
-            svf_n_dir = 8, svf_r_max = 20, svf_noise = 0,
-            saturation = 80, brithness = 40,
-            isave = True, ikeep = False)
     
-    If you do not install as a module, you can also, use the present file as a script file.
-    Just, copy the script file in the folder you want to work, 
-    then, modify the parameters in the function main (last function of the file),
-    and finaly run in a terminal window (where is your script file!):
-        ~$ python pyRRIM.py
 
 INSTALL:
     In the top folder, run in your terminal:
