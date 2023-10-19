@@ -45,6 +45,23 @@ from .statsfuncs import *
 def readData(filename_data, systems = ['AHE', 'AFT', 'ZHE', 'ZFT'],
              names = ['LAT','LONG','HEIGHT', 'AHE', 'DAHE', 'AFT', 'DAFT',
                       'ZHE', 'DZHE', 'ZFT', 'DZFT', 'KAR', 'DKAR']):
+    """_summary_
+
+    Args:
+        filename_data (string)  : Filename where data are stored.
+        systems (list, optional): Systems to analyze and plot. 
+                                  Defaults to ['AHE', 'AFT', 'ZHE', 'ZFT'].
+        names (list, optional)  : Header of the data file.
+                                  Defaults to ['LAT','LONG','HEIGHT', 'AHE', 'DAHE', 'AFT', 'DAFT', 
+                                               'ZHE', 'DZHE', 'ZFT', 'DZFT', 'KAR', 'DKAR'].
+
+    Raises:
+        NameError: Input file does not exists.
+
+    Returns:
+        fdata (Pandas dataframe): Dataframe of data.
+        nobs (dictionnary)      : Dictionnary of the number of data for each system.
+    """
 
     # Check if the input file exists
     if not os.path.isfile(filename_data):
@@ -96,38 +113,47 @@ def readData(filename_data, systems = ['AHE', 'AFT', 'ZHE', 'ZFT'],
     #nd = len(fdata)
     # Find the number of AHe, AFT, ZHe, ZFT
     # Check the header to find wich system are in the data
-    if 'AHE' in obstype:
-        a = len(fdata[~np.isnan(fdata["AHE"])]) # number of AHe ages
-    else:
-        a = None
-    if 'AFT' in obstype:
-        b = len(fdata[~np.isnan(fdata["AFT"])]) # number of AFT ages
-    else:
-        b = None
-    if 'ZFT' in obstype:
-        c = len(fdata[~np.isnan(fdata["ZFT"])]) # number of ZFT ages
-    else:
-        c = None
-    if 'ZHE' in obstype:
-        d = len(fdata[~np.isnan(fdata["ZHE"])]) # number of ZHe ages
-    else:
-        d = None
+    #if 'AHE' in obstype:
+    #    a = len(fdata[~np.isnan(fdata["AHE"])]) # number of AHe ages
+    #else:
+    #    a = None
+    #if 'AFT' in obstype:
+    #    b = len(fdata[~np.isnan(fdata["AFT"])]) # number of AFT ages
+    #else:
+    #    b = None
+    #if 'ZFT' in obstype:
+    #    c = len(fdata[~np.isnan(fdata["ZFT"])]) # number of ZFT ages
+    #else:
+    #    c = None
+    #if 'ZHE' in obstype:
+    #    d = len(fdata[~np.isnan(fdata["ZHE"])]) # number of ZHe ages
+    #else:
+    #    d = None
+    
+    nobs = {}
+    for item in obstype:
+        nobs[item] = len(fdata[~np.isnan(fdata[item])])
 
     # fdata is the table,
     # nobs is a dictionnary of the number of data
-    nobs = {'AHE' : a, 'AFT' : b, 'ZHE' : d, 'ZFT' : c}
+    #nobs = {'AHE' : a, 'AFT' : b, 'ZHE' : d, 'ZFT' : c}
     return fdata, nobs
 
 
 #########################################################################################
 def calculateBIC(filename_data, fdata, nobs, systems = ['AHE', 'AFT', 'ZHE', 'ZFT'], nslopes = None):
     """
-    
+    Function to compute the BIC criterion.    
 
     Args:
-        val_data (_type_): _description_
-        nobs (_type_): _description_
-        systems (list, optional): _description_. Defaults to ['AHE', 'AFT', 'ZHE', 'ZFT'].
+        filename_data (string)    : Input data file.
+        fdata (Pandas dataframe)  : Dataframe of data.
+        nobs (dictionnary)        : Dictionnary of the number of data for each system.
+        systems (list, optional)  : System(s) to analyse/plot.
+                                    Defaults: ['AHE', 'AFT', 'ZHE', 'ZFT'].
+        nslope (integer, optional): number of slopes to test; 
+                                    If not given, the default value ('None') imposes a search of the
+                                    number of slopes
     """
 
     if not os.path.isdir('Graphs/'):

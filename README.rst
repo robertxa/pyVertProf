@@ -222,6 +222,15 @@ The BIC build two files, stored in the Graphs directory
 	- BIC.pdf: Graphical results of the computation
 	- resultsBIC.txt: Output of the BIC methods
 
+How to cite
+-----------
+If you use this code, please cite:
+
+``Robert X., pyVertProf, a Python code to compute regressions on ages-elevation relationships (2023), https://github.com/robertxa/pyVertProf, DOI:10.5281/zenodo.10020966``
+
+.. image:: https://zenodo.org/badge/117019212.svg
+  :target: https://zenodo.org/doi/10.5281/zenodo.10020966
+
 Contact
 -------
 
